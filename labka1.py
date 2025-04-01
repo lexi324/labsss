@@ -25,3 +25,23 @@ class BlockProcessor:
                 self.current_view += 1
                 self.votes.remove(block_id)
         return self.blockchain
+
+    def get_input(self):
+        while True:
+            command = input("Enter command (block/vote/exit): ")
+            if command == "exit":
+                break
+            elif command == "block":
+                block_id = input("Enter block id: ")
+                view = input("Enter view: ")
+                self.add_block({"id": block_id, "view": view})
+            elif command == "vote":
+                vote_id = input("Enter vote id: ")
+                self.add_vote({"id": vote_id})
+            else:
+                print("Invalid command")
+
+if __name__ == "__main__":
+    processor = BlockProcessor()
+    processor.get_input()
+    print("Final blockchain:", processor.make_blockchain())
